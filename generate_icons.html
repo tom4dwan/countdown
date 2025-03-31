@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成图标</title>
+</head>
+<body>
+    <canvas id="icon16" width="16" height="16"></canvas>
+    <canvas id="icon48" width="48" height="48"></canvas>
+    <canvas id="icon128" width="128" height="128"></canvas>
+    
+    <div id="downloads"></div>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // 设置背景
+            ctx.fillStyle = '#4A90E2';
+            ctx.fillRect(0, 0, size, size);
+            
+            // 绘制时钟外圈
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = size * 0.08;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size * 0.4, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // 绘制时钟指针
+            ctx.fillStyle = '#FFFFFF';
+            // 时针
+            ctx.save();
+            ctx.translate(size/2, size/2);
+            ctx.rotate(Math.PI * 0.8);
+            ctx.fillRect(-size * 0.02, -size * 0.2, size * 0.04, size * 0.2);
+            ctx.restore();
+            
+            // 分针
+            ctx.save();
+            ctx.translate(size/2, size/2);
+            ctx.rotate(Math.PI * 1.3);
+            ctx.fillRect(-size * 0.02, -size * 0.3, size * 0.04, size * 0.3);
+            ctx.restore();
+            
+            // 中心点
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size * 0.04, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 生成不同尺寸的图标
+        const sizes = [16, 48, 128];
+        sizes.forEach(size => {
+            const canvas = document.getElementById(`icon${size}`);
+            drawIcon(canvas, size);
+            
+            // 创建下载链接
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.textContent = `下载 ${size}x${size} 图标`;
+            link.style.display = 'block';
+            link.style.margin = '10px';
+            document.getElementById('downloads').appendChild(link);
+        });
+    </script>
+</body>
+</html> 

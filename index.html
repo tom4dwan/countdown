@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
+    <title>考试倒计时壁纸生成器</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            width: 400px;
+            height: 600px;
+            margin: 0;
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⏳ 考试倒计时壁纸生成器</h1>
+        <div class="settings">
+            <label for="examDate">考试日期：</label>
+            <input type="date" id="examDate" required pattern="\d{4}-\d{2}-\d{2}">
+        </div>
+        
+        <div class="countdown">
+            <!-- 确保这个元素存在 -->
+            <div id="daysLeft">-</div>
+            <div class="label">天</div>
+        </div>
+        
+        <!-- 修改 Canvas 容器结构 -->
+        <div class="preview-container">
+            <canvas id="wallpaperCanvas"></canvas>
+        </div>
+        
+        <button id="downloadBtn">下载壁纸</button>
+        <div class="instructions">
+            <h3>📱 设置教程：</h3>
+            <div class="os-instructions">
+                <div class="ios">
+                    <p>iOS：下载图片 → 相册 → 设为墙纸 → 视角缩放关闭</p>
+                </div>
+                <div class="android">
+                    <p>Android：下载图片 → 图库 → 设为锁屏壁纸</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
